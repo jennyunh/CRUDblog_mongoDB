@@ -112,7 +112,10 @@ router.get('/update/:id', async function (req, res) {
 
   const post = await db.getDb().collection('posts').findOne({ _id: new ObjectId(postId) }, { date: 0, author: 0 });
 
+if (!post) {
+  return res.status(404).render('404');
 
+}
 
   res.render('update-post', { post: post })
 }
