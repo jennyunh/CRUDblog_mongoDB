@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <%- include('includes/head', { title: 'All Posts' }) %>
+  <link rel="stylesheet" href="/styles/posts.css">
+</head>
+
+<body>
+  <%- include('includes/header') %>
+  <main id="all-posts">
+    <h1>All Posts</h1>
+   
+
+<% if (!posts || posts.length === 0) { %>
+  <p>No posts found! Start creating some.</p>
+<% } else {
+      for (const post of posts) { %>
+        <%- include('includes/post-item', { post: post }) %>
+    
+    <% } }%>
+
+
+
+    
+  
+
+  </main> 
+</body>
+
+</html>
