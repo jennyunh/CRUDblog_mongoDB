@@ -71,8 +71,16 @@ router.post('/posts', async function (req, res) {
 
 
 //VIEW post
-router.get('/posts/:id', async function (req, res) {
-  const postId = req.params.id;
+//next parameter is a function that can be executed. It is used
+//to move the request to the next middleware in line
+router.get('/posts/:id', async function (req, res, next) {
+  let postId = req.params.id;
+
+try {
+  postId = new ObjectId(postId) 
+} catch (error) {
+  return res.status(404).render('404')}
+
 
   const post = await db.getDb().collection('posts').findOne({ _id: new ObjectId(postId) }, { summary: 0 });
 
